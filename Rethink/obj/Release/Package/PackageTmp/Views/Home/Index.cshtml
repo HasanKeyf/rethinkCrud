@@ -1,0 +1,177 @@
+﻿
+
+<div class="page-header"></div>
+
+<div class="row">
+
+    <div class="col-md-8">
+        <button ng-click="addNewOne()" class="btn btn-med btn-success">Add new one</button>
+        <table class="table table-bordered table-condensed table-hover">
+            <thead>
+            <tr class="active">
+                <td>Product Name</td>
+                <td>Price</td>
+                <td>Company</td>
+                <td>Category</td>
+                <td>Actions</td>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr ng-repeat="p in Products">
+               
+                <td ng-mouseover="p.ImgShow = p.ProductId" ng-mouseleave="p.ImgShow=false">
+                    {{p.ProductName}}
+                    <img width="50px" height="50px" ng-show="p.ImgShow" src="{{p.ProductUrl}}" alt="" />
+                </td>
+                <td>{{p.UnitPrice | currency:"USD$"}}</td>
+                <td>{{p.Category.CategoryName}}</td>
+                <td>{{p.Company.CompanyName}}</td>
+                <td><button ng-click="edit(p)" class="btn btn-xs btn-primary">Edit</button>
+                    <button ng-click="delete(p)" class="btn btn-xs btn-danger">Delete</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-4" ng-show="startOperation">
+        <button ng-click="editing=false;startOperation=false" class="btn btn-xs btn-danger pull-right">X</button>
+
+        <form ng-show="editing" class="form-horizontal">
+            <fieldset>
+                <legend>Edit</legend>
+                <div class="form-group">
+
+                    <div class="col-lg-10">
+                        <label for="ProductName" class="col-lg-2 control-label">Name</label>
+                        <input type="text" class="form-control" id="ProductName"
+                               placeholder="Product Name"
+                               ng-model="selectedProduct.ProductName">
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <div class="col-lg-10">
+                        <label for="ProductPrice" class="col-lg-2 control-label">Price</label>
+                        <input type="text" class="form-control" id="ProductPrice"
+                               placeholder="Product Name"
+                               ng-model="selectedProduct.UnitPrice">
+                    </div>
+
+
+                </div>
+
+                <div class="form-group">
+
+                    <div class="col-lg-10">
+                        <label for="ProductImage" class="col-lg-2 control-label">Image</label>
+                        <input type="text" class="form-control" id="ProductImage"
+                               placeholder="Image Url"
+                               ng-model="selectedProduct.ProductUrl">
+                    </div>
+
+
+                </div>
+
+                <div class="form-group">
+
+                    <div class="col-lg-10">
+                        <label for="selectCategory" class="col-lg-2 control-label">Category</label>
+
+                        <select ng-model="selectedProduct.CategoryId" class="form-control" id="selectCategory">
+
+                            <option ng-repeat="c in Categories" value="{{c.CategoryId}}">{{c.CategoryName}}</option>
+
+                        </select>
+                        <br>
+                        <label for="selectCompany" class="col-lg-2 control-label">Company</label>
+                        <select ng-model="selectedProduct.CompanyId" class="form-control" id="selectCompany">
+
+                            <option ng-repeat="company in Companies" value="{{company.CompanyId}}">{{company.CompanyName}}</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button ng-click="cancelEdit()" type="reset" class="btn btn-default btn-xs">Cancel</button>
+                        <button ng-click="update()" class="btn btn-primary btn-xs">Submit</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+
+        <form ng-show="adding" class="form-horizontal">
+            <fieldset>
+                <legend>Edit</legend>
+                <div class="form-group">
+
+                    <div class="col-lg-10">
+                        <label for="ProductNameAdd" class="col-lg-2 control-label">Name</label>
+                        <input type="text" class="form-control" id="ProductNameAdd"
+                               placeholder="Product Name"
+                               ng-model="selectedProduct.ProductName">
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <div class="col-lg-10">
+                        <label for="ProductPrice" class="col-lg-2 control-label">Price</label>
+                        <input type="text" class="form-control" id="ProductPriceAdd"
+                               placeholder="Product Name"
+                               ng-model="selectedProduct.UnitPrice">
+                    </div>
+
+
+                </div>
+
+                <div class="form-group">
+
+                    <div class="col-lg-10">
+                        <label for="ProductImage" class="col-lg-2 control-label">Image</label>
+                        <input type="text" class="form-control" id="ProductImageAdd"
+                               placeholder="Image Url"
+                               ng-model="selectedProduct.ProductUrl">
+                    </div>
+
+
+                </div>
+
+                <div class="form-group">
+
+                    <div class="col-lg-10">
+                        <label for="selectCategoryAdd" class="col-lg-2 control-label">Category</label>
+
+                        <select ng-model="selectedProduct.CategoryId" class="form-control" id="selectCategoryAdd">
+
+                            <option ng-repeat="c in Categories" value="{{c.CategoryId}}">{{c.CategoryName}}</option>
+
+                        </select>
+                        <br>
+                        <label for="selectCompanyAdd" class="col-lg-2 control-label">Company</label>
+                        <select ng-model="selectedProduct.CompanyId" class="form-control" id="selectCompanyAdd">
+
+                            <option ng-repeat="company in Companies" value="{{company.CompanyId}}">{{company.CompanyName}}</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button ng-click="cancelEdit()" type="reset" class="btn btn-default btn-xs">Cancel</button>
+                        <button ng-click="Add()" class="btn btn-primary btn-xs">Submit</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+
+
+    </div>
+</div>
